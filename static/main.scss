@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+
+
+$bodycolor: #C62828;
+$basecolor: #C62828;
+$dark1: #2a2b38;
+$dark2: #1f2029;
+
+body{
+	font-family: 'Poppins', sans-serif;
+	font-weight: 300;
+	font-size: 15px;
+	line-height: 1.7;
+	color: #fff;
+	background: none;
+    background-image: url(./img/bg.jpg);
+    backdrop-filter: blur(10px);
+	overflow-x: hidden;
+}
+.section{
+    position: relative;
+    width: 100%;
+    display: block;
+}
+.full-height{ min-height: 100vh; }
+
+.btn{  
+    border-radius: 4px;
+    height: 44px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: all 200ms linear;
+    padding: 0 30px;
+    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    -ms-flex-pack: center;
+    text-align: center;
+    border: none;
+    background-color: $basecolor;
+    color: #fff;
+    box-shadow: 0 8px 24px 0 $basecolor;
+}
+.btn:active,
+.btn:focus{  
+  background-color: #fff;
+  color: $basecolor;
+  box-shadow: 0 8px 24px 0 rgba(255,255,255,.2);
+}
+.btn:hover{  
+  background-color: #fff;
+  color: $basecolor;
+  box-shadow: 0 8px 24px 0 rgba(255,255,255,.2);
+}
+
+.card{
+    background-color: $dark1 !important;
+}
+
+.card-inner{
+    background-color: $dark2 !important;
+}
