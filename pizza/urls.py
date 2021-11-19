@@ -21,9 +21,6 @@ from orders.views import my_profile, register
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("orders.urls")),
-    path('accounts/', include('django.contrib.auth.urls')),
-    path('accounts/profile/', my_profile),
-    path('register/', register),
-    path('jet/', include('jet.urls', 'jet')),
+   
     
 ]

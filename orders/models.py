@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from datetime import datetime
 # Create your models here.
 class Categorias(models.Model):
     nombreCategoria = models.CharField(verbose_name="Nombre Categoría", max_length=25)
@@ -29,7 +29,9 @@ class Toppings(models.Model):
 class Orden(models.Model):
     total = models.FloatField(verbose_name="Monto Total Orden")
     seCompleto = models.BooleanField(verbose_name="Orden Completa")
+    fecha = models.DateTimeField(verbose_name="Fecha", default=datetime.now())
     idUSuario = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    
 
     def __str__(self):
         return f"{self.total} - {self.idUSuario} - {self.seCompleto}"

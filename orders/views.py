@@ -1,9 +1,15 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.http.response import HttpResponseRedirect
+from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import user_passes_test
 from .forms import CreateUserForm
 from .models import *
+from django.urls import reverse
 # Create your views here.
+
+
+
 def index(request):
 
     context = {
@@ -18,7 +24,12 @@ def index(request):
 
     return render(request, 'orders/index.html', context)
 
+
 def my_profile(request):
+
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('login'))
+
     return render(request, 'accounts/index.html')
 
 def register(request):
