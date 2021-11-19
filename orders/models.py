@@ -26,12 +26,14 @@ class Toppings(models.Model):
     def __str__(self):
         return f"{self.nombreTopping} - {self.idCategoria}"
 
+class Estado(models.Model):
+    nombreEstado = models.CharField(verbose_name="Nombre Estado", max_length=25)
+
 class Orden(models.Model):
     total = models.FloatField(verbose_name="Monto Total Orden")
-    seCompleto = models.BooleanField(verbose_name="Orden Completa")
     fecha = models.DateTimeField(verbose_name="Fecha", default=datetime.now())
     idUSuario = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-    
+    estado = models.ForeignKey(Estado,  on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return f"{self.total} - {self.idUSuario} - {self.seCompleto}"

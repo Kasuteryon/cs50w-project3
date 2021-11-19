@@ -9,8 +9,10 @@
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
     
     {% bootstrap_css %}
-    
+
     {% bootstrap_javascript %}
+
+    {% bootstrap_messages %}
 
     {% block head_css %}
     
@@ -49,7 +51,7 @@
               {% else %}
 
               <li class="nav-item">
-                <a class="nav-link" href="/register">Regístrate</a>
+                <a class="nav-link" href="{% url 'register' %}">Regístrate</a>
               </li>
 
               <li class="nav-item">

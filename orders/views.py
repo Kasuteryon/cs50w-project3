@@ -30,7 +30,12 @@ def my_profile(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('login'))
 
-    return render(request, 'accounts/index.html')
+    context = {
+        'Opciones': OpcionMenu.objects.all(),
+        'Toppings': Toppings.objects.all()
+    }
+
+    return render(request, 'accounts/index.html', context)
 
 def register(request):
     form = CreateUserForm()

@@ -71,4 +71,12 @@ body {
 .card-inner {
   background-color: #1f2029 !important;
 }
+
+.modal-content {
+  background-color: #2a2b38 !important;
+}
+
+.form-floating > label {
+  color: #2a2b38 !important;
+}
 /*# sourceMappingURL=main.css.map */
