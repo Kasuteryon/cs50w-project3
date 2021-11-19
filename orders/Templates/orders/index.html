@@ -16,11 +16,156 @@
                 <div class="card-body">
                     <h1 class="text-center">Menú</h1>
 
-                    <div class="container card-inner">
-                        <div class="card-body">
-                           
+                    <div class="container card-inner" style="margin-bottom: 30px;">
+                        <div class="card-body row">
+                            <h3 class="text-center">Pizza Regular</h3>
+                            {% for re in Regular%}
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                
+                                
+                                <div class="card" style="margin-bottom: 20px;">
+                                    <img src="https://t1.rg.ltmcdn.com/es/images/8/4/3/img_pizza_de_queso_9348_600.jpg" class="card-img-top" alt="">
+                                    <div class="card-body">
+                                        <h4 class="card-title text-center">{{re.nombreOpcion}}</h4>
+                                        <p>Precio: ${{re.precio}}</p>
+                                        <p>Tamaño: {{re.tamaño}}</p>
+                                        
+                                    </div>
+                                    <div class="card-footer">
+                                        <p>Se ha ordenado {{re.contador}} veces</p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            {% endfor %}
                         </div>
                     </div>
+
+                    <div class="container card-inner" style="margin-bottom: 30px;">
+                        <div class="card-body row">
+                            <h3 class="text-center">Pizza Siciliana</h3>
+                            {% for re in Siciliana%}
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                
+                                
+                                <div class="card" style="margin-bottom: 20px;">
+                                    <img src="https://t1.rg.ltmcdn.com/es/images/8/4/3/img_pizza_de_queso_9348_600.jpg" class="card-img-top" alt="">
+                                    <div class="card-body">
+                                        <h4 class="card-title text-center">{{re.nombreOpcion}}</h4>
+                                        <p>Precio: ${{re.precio}}</p>
+                                        <p>Tamaño: {{re.tamaño}}</p>
+                                        
+                                    </div>
+                                    <div class="card-footer">
+                                        <p>Se ha ordenado {{re.contador}} veces</p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="container card-inner" style="margin-bottom: 30px;">
+                        <div class="card-body row">
+                            <h3 class="text-center">Subs</h3>
+                            {% for re in Subs%}
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                
+                                
+                                <div class="card" style="margin-bottom: 20px;">
+                                    <img src="https://t1.rg.ltmcdn.com/es/images/8/4/3/img_pizza_de_queso_9348_600.jpg" class="card-img-top" alt="">
+                                    <div class="card-body">
+                                        <h4 class="card-title text-center">{{re.nombreOpcion}}</h4>
+                                        <p>Precio: ${{re.precio}}</p>
+                                        <p>Tamaño: {{re.tamaño}}</p>
+                                        
+                                    </div>
+                                    <div class="card-footer">
+                                        <p>Se ha ordenado {{re.contador}} veces</p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="container card-inner" style="margin-bottom: 30px;">
+                        <div class="card-body row">
+                            <h3 class="text-center">Ensaladas</h3>
+                            {% for re in Ensaladas%}
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                
+                                
+                                <div class="card" style="margin-bottom: 20px;">
+                                    <img src="https://t1.rg.ltmcdn.com/es/images/8/4/3/img_pizza_de_queso_9348_600.jpg" class="card-img-top" alt="">
+                                    <div class="card-body">
+                                        <h4 class="card-title text-center">{{re.nombreOpcion}}</h4>
+                                        <p>Precio: ${{re.precio}}</p>
+                                        <p>Tamaño: {{re.tamaño}}</p>
+                                        
+                                    </div>
+                                    <div class="card-footer">
+                                        <p>Se ha ordenado {{re.contador}} veces</p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="container card-inner" style="margin-bottom: 30px;">
+                        <div class="card-body row">
+                            <h3 class="text-center">Pasta</h3>
+                            {% for re in Pasta%}
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                
+                                
+                                <div class="card" style="margin-bottom: 20px;">
+                                    <img src="https://t1.rg.ltmcdn.com/es/images/8/4/3/img_pizza_de_queso_9348_600.jpg" class="card-img-top" alt="">
+                                    <div class="card-body">
+                                        <h4 class="card-title text-center">{{re.nombreOpcion}}</h4>
+                                        <p>Precio: ${{re.precio}}</p>
+                                        <p>Tamaño: {{re.tamaño}}</p>
+                                        
+                                    </div>
+                                    <div class="card-footer">
+                                        <p>Se ha ordenado {{re.contador}} veces</p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="container card-inner" style="margin-bottom: 30px;">
+                        <div class="card-body row">
+                            <h3 class="text-center">Platillos de Cena</h3>
+                            {% for re in Cena%}
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                
+                                
+                                <div class="card" style="margin-bottom: 20px;">
+                                    <img src="https://t1.rg.ltmcdn.com/es/images/8/4/3/img_pizza_de_queso_9348_600.jpg" class="card-img-top" alt="">
+                                    <div class="card-body">
+                                        <h4 class="card-title text-center">{{re.nombreOpcion}}</h4>
+                                        <p>Precio: ${{re.precio}}</p>
+                                        <p>Tamaño: {{re.tamaño}}</p>
+                                        
+                                    </div>
+                                    <div class="card-footer">
+                                        <p>Se ha ordenado {{re.contador}} veces</p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
