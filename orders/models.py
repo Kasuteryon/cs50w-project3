@@ -14,6 +14,7 @@ class OpcionMenu(models.Model):
     tamaño = models.CharField(verbose_name="Tamaño", max_length=35)
     idCategoria = models.ForeignKey(Categorias, on_delete=models.SET_NULL, null=True, blank=True)
     contador = models.IntegerField(verbose_name="Cantidad de Veces Adquirido", default=0)
+    imagen = models.ImageField(upload_to='static/img', blank=True)
 
     def __str__(self):
         return f"{self.nombreOpcion} - {self.precio} - {self.tamaño} - {self.idCategoria} - Rank: {self.contador}"
