@@ -29,6 +29,11 @@ class Toppings(models.Model):
 class Estado(models.Model):
     nombreEstado = models.CharField(verbose_name="Nombre Estado", max_length=25)
 
+    def __str__(self):
+        return f"{self.id} - {self.nombreEstado} "
+        #return f"{self.id}"
+
+
 class Orden(models.Model):
     total = models.FloatField(verbose_name="Monto Total Orden")
     fecha = models.DateTimeField(verbose_name="Fecha", default=datetime.now())
@@ -36,7 +41,7 @@ class Orden(models.Model):
     estado = models.ForeignKey(Estado,  on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.total} - {self.idUSuario} - {self.seCompleto}"
+        return f"N° {self.id} - Total: ${self.total} - Por {self.idUSuario} - Estado: {self.estado.nombreEstado}"
 
 class DetalleOrden(models.Model):
     idOrden = models.ForeignKey(Orden, on_delete=models.SET_NULL, null=True, blank=True)
@@ -45,7 +50,7 @@ class DetalleOrden(models.Model):
     subtotal = models.FloatField(verbose_name="Subtotal")
 
     def __str__(self):
-        return f"{self.idOrden} - {self.idOpcion} - {self.cantidad} - {self.subtotal}"
+        return f"Orden {self.idOrden} - Opción: {self.idOpcion} - {self.cantidad} Unidades - ${self.subtotal}"
 
 class DetalleOrdenTopping(models.Model):
     idDetalleOrden = models.ForeignKey(DetalleOrden, on_delete=models.SET_NULL, null=True, blank=True)

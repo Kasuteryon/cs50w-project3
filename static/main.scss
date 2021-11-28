@@ -71,3 +71,13 @@ body{
     color: $dark1 !important;
 }
 
+.navbar-toggler{
+    transition: ease-in-out 1s;
+    border: none !important;
+}
+
+.navbar-toggler:hover{
+    transition: ease-in-out 1s;
+    background-color: $bodycolor !important;
+    
+}

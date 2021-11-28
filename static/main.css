@@ -79,4 +79,16 @@ body {
 .form-floating > label {
   color: #2a2b38 !important;
 }
+
+.navbar-toggler {
+  -webkit-transition: ease-in-out 1s;
+  transition: ease-in-out 1s;
+  border: none !important;
+}
+
+.navbar-toggler:hover {
+  -webkit-transition: ease-in-out 1s;
+  transition: ease-in-out 1s;
+  background-color: #C62828 !important;
+}
 /*# sourceMappingURL=main.css.map */
