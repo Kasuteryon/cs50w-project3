@@ -87,14 +87,16 @@
 
                     <div class="card-inner" style="margin-top: 40px; padding: 30px;">
                       <div class="row">
+                        {% for head in header %}
                         <div class="col-lg-6 col-sm-12">
-                          <h4 class="text-center">Fecha: 19/11/21</h4>
-                          <h4 class="text-center">Estado: En proceso</h4>
+                          <h4 class="text-center">Orden N°{{head.id}}</h4>
+                          <h4 class="text-center">Estado: {{head.estado.nombreEstado}}</h4>
                         </div>
                         <div class="col-lg-6 col-sm-12">
-                          <h4 class="text-center">Usuario: pacopaco_01</h4>
-                          <h4 class="text-center">Total: $ 10</h4>
+                          <h4 class="text-center">Usuario: {{request.user.username}}</h4>
+                          <h4 class="text-center">Total: $ {{head.total}}</h4>
                         </div>
+                        {% endfor %}
                       </div>
                     </div>
 
@@ -106,22 +108,26 @@
                               <th scope="col">#</th>
                               <th scope="col">Categoría</th>
                               <th scope="col">Opción</th>
+                              <th scope="col">Tamaño</th>
                               <th scope="col">Toppings</th>
-                              <th scope="col">Precio</th>
+                              <th scope="col">Precio Unitario</th>
                               <th scope="col">Cantidad</th>
                               <th scope="col">Subtotal</th>
                             </tr>
                           </thead>
                           <tbody>
+                            {% for item in items %}
                             <tr>
-                              <th scope="row">1</th>
-                              <td>Ensalada</td>
-                              <td>Ensalada César Pequeña</td>
+                              <th scope="row">{{item.idOrden.id}}</th>
+                              <td>{{item.idOpcion.idCategoria.nombreCategoria}}</td>
+                              <td>{{item.idOpcion.nombreOpcion}}</td>
+                              <td>{{item.idOpcion.tamaño}}</td>
                               <td>-</td>
-                              <td>$ 5</td>
-                              <td>2</td>
-                              <td>$ 10</td>
+                              <td>$ {{item.idOpcion.precio}}</td>
+                              <td>{{item.cantidad}}</td>
+                              <td>$ {{item.subtotal}}</td>
                             </tr>
+                            {% endfor %}
                             
                           </tbody>
                         </table>

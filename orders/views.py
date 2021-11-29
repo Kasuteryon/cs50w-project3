@@ -29,20 +29,9 @@ def index(request):
 def my_profile(request):
 
     if not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse('login'))
-
-    estado = Estado.objects.get(id=1)
+            return HttpResponseRedirect(reverse('login'))
     user = User.objects.get(id=request.user.id)
-    header = Orden.objects.filter(estado=estado, idUsuario=user)
-    items = DetalleOrden.filter(idOrden=header)
-    context = {
-        'Opciones': OpcionMenu.objects.all(),
-        'Toppings': Toppings.objects.all(),
-        'header': header,
-        'items': items
-    }   
 
-    opcion = {}
     if request.method == 'POST':
         orders = Orden.objects.filter(idUSuario=request.user.id)
         
@@ -86,16 +75,37 @@ def my_profile(request):
         detalle = DetalleOrden(idOrden = currentOrden, idOpcion=precio, cantidad=cantidad, subtotal=subtotal)
         detalle.save()
 
+        currentOrden.total += subtotal
+        currentOrden.save()
+
         for item in topping:
             top = Toppings.objects.get(id=item)
 
             detalleTopping = DetalleOrdenTopping(idDetalleOrden= detalle, idTopping=top)
             detalleTopping.save()
 
-        return render(request, 'accounts/index.html', context)
+        return render(request, 'accounts/index.html')
 
     else:
+
+        estado = Estado.objects.get(id=1)
         
+        header = Orden.objects.filter(estado=estado, idUSuario=user)
+        
+
+        try:
+            items = DetalleOrden.objects.filter(idOrden=header[0])
+        except IndexError:
+            items = ''
+        context = {
+            'Opciones': OpcionMenu.objects.all(),
+            'Toppings': Toppings.objects.all(),
+            'header': header,
+            'items': items
+        }   
+        print("---------------------")
+        print(items)
+
         return render(request, 'accounts/index.html', context)
 
 def register(request):
