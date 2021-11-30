@@ -140,3 +140,12 @@ def register(request):
         'form': form
     }
     return render(request, 'accounts/register.html', context)
+
+def history(request):
+
+    context = {
+        'Proceso': Orden.objects.filter(idUSuario=request.user.id, estado=Estado.objects.get(id=2)),
+        'Finalizadas': Orden.objects.filter(idUSuario=request.user.id, estado=Estado.objects.get(id=3))
+    }
+
+    return render(request, 'orders/history.html', context)

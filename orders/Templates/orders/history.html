@@ -1,0 +1,88 @@
+
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% load static %}
+
+{% block head_css %}
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+{% endblock %}
+
+{% block main %}
+
+<div class="section">
+    <div class="container">
+        <div class="row full-height justify-content-center">
+            <div class="card" style="margin-top: 50px; margin-bottom: 50px;">
+                <div class="card-body">
+                
+                    <div class="card-inner" style="margin-top: 40px; padding: 30px;">
+                      <div class="row">
+                        <h4 class="text-center">En Proceso</h4>
+                      </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 50px;"> 
+                      <div class="table-responsive">
+                        <table class="table table-dark table-striped table-hover table-bordered ">
+                          <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Monto Total</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for item in Proceso %}
+                            <tr>
+                              <th scope="row">{{item.id}}</th>
+                              <td>{{item.fecha}}</td>
+                              <td>{{item.estado.nombreEstado}}</td>
+                              <td>$ {{item.total|floatformat }}</td>
+                            </tr>
+                            {% endfor %} 
+                            
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                    <div class="card-inner" style="margin-top: 40px; padding: 30px;">
+                        <div class="row">
+                          <h4 class="text-center">Finalizadas</h4>
+                        </div>
+                      </div>
+  
+                      <div class="row" style="margin-top: 50px;"> 
+                        <div class="table-responsive">
+                          <table class="table table-dark table-striped table-hover table-bordered ">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Monto Total</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in Finalizadas %}
+                                <tr>
+                                  <th scope="row">{{item.id}}</th>
+                                  <td>{{item.fecha}}</td>
+                                  <td>{{item.estado.nombreEstado}}</td>
+                                  <td>$ {{item.total|floatformat }}</td>
+                                </tr>
+                                {% endfor %} 
+                              
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
