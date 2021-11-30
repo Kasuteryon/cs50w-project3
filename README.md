@@ -2,19 +2,19 @@
 
 ## Elaborado por Eduardo Castellón (C^2)
 
-Bienvenido a mi Project3 de WEB50Xni: Pizza: Una aplicación web basada en la Pizzería Pinocchio's donde podés:
+Bienvenido a mi Project3 de WEB50Xni: ¡Pizza! Una aplicación web basada en la Pizzería Pinocchio's donde podés:
 
-- Como dueño de la pizzería agregar productos en tus según las diferentes categorías.
+- Como dueño de la pizzería: Agregar productos en tus según las diferentes categorías.
 
-- Como usuario, ver el Menú con el detalle de las opciones disponibles, registrarte, iniciar sesión, añadir al carrito ordenes, procesarlas y ver su estado desde el historial de ordenes.
+- Como usuario: Ver el Menú con el detalle de las opciones disponibles, registrarte, iniciar sesión, añadir al carrito ordenes, procesarlas y ver su estado desde el historial de ordenes.
 
 ## Estructura - Funcionalidad - Descripción
 
 ### Scripts
 
-Para le ejecución de éste proyecto únicamente se utilizan los siguientes scripts:
+Para le ejecución de éste proyecto se utilizaron los siguientes scripts:
 
-#### Python:
+#### Django (Python):
 
 Tenemos 2 módulos, Pizza siendo el módulo principal donde se encuentran los Ajustes del Proyecto y las rutas principales y Orders, donde se opera la lógica operativa del proyecto.
 
@@ -23,8 +23,8 @@ Tenemos 2 módulos, Pizza siendo el módulo principal donde se encuentran los Aj
 - models.py donde se escriben los modelos que enlazan la BD a través del ORM de Django.
 
 
-#### HTML: 
-- base.html: HTML que renderiza la plantilla Index en su interior que contiene las referencias de todos los estilos CSS y Scripts JS.
+#### HTML5: 
+- Base: HTML que renderiza la plantilla Index en su interior que contiene las referencias de todos los estilos CSS y Scripts JS.
 - Login: HTML independiente para iniciar sesión.
 - Logged_out: HTML que muestra la vista de despedida por sesión cerrada.
 - Register: HTML para registro de usuarios.
@@ -106,7 +106,7 @@ A través de esta vista se podrán ver que ordenes se encuentran en proceso y qu
 
 #### 2. Cambiar Estado de Órdenes
 
-Una vez preparada la pizza y entregada se podrá editar la orden en finalizada y en el historial de cada usuario se verá el cambio.
+Una vez preparada la pizza y entregada desde el admin se podrá editar la orden en finalizada y en el historial de cada usuario se verá el cambio.
 
 ![Imagen](./static/img/editar.png)
 
