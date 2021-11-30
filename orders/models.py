@@ -58,3 +58,10 @@ class DetalleOrdenTopping(models.Model):
 
     def __str__(self):
         return f"{self.idDetalleOrden} - {self.idTopping}"
+
+class CurrentOrder(models.Model):
+    idUser = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    idOrden = models.ForeignKey(Orden, on_delete=models.SET_NULL, null=True, blank=True)
+
+    def __str__(self):
+        return f"Orden Actual: {self.idOrden} por: {self.idUser.username}"

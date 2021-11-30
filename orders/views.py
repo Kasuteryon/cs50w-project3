@@ -31,7 +31,7 @@ def my_profile(request):
     if not request.user.is_authenticated:
             return HttpResponseRedirect(reverse('login'))
     user = User.objects.get(id=request.user.id)
-
+    
     if request.method == 'POST':
         orders = Orden.objects.filter(idUSuario=request.user.id)
         
@@ -41,14 +41,24 @@ def my_profile(request):
 
         precio = OpcionMenu.objects.get(id=opcion)
         subtotal = precio.precio * int(cantidad)
-        
-        print("---------------------")
+    
         
         if not orders.exists():
             currentOrden = Orden(total=0, fecha=datetime.now(), idUSuario=user, estado=Estado.objects.get(id=1))
             currentOrden.save()
 
-            request.session['currentOrder'] = currentOrden.id;
+            # request.session['currentOrder'] = currentOrden.id;
+            
+            
+            try:
+                # orderExists = CurrentOrder.objects.get(idOrden=currentOrden.id, idUser=request.user.id)
+                current = CurrentOrder.objects.get(idUser=request.user.id)
+                current.idOrden = currentOrden
+                current.save()
+            except:
+                current = CurrentOrder(idOrden=currentOrden, idUser=request.user)
+                current.save()
+                
 
         exist = False
         for order in orders:
@@ -60,18 +70,28 @@ def my_profile(request):
 
 
         if exist:
-            print("------------")
-            print("SUCCESS")
-            currentOrden = Orden.objects.get(id = request.session['currentOrder'])
+            #print("------------")
+            #print("SUCCESS")
+            current = CurrentOrder.objects.filter(idUser=request.user.id)
+            #print(current[0].idOrden.id)
+            od = Orden.objects.get(id=current[0].idOrden.id)
+            currentOrden = Orden.objects.get(id = od.id)
+
+            
                 
         else:
 
             currentOrden = Orden(total=0, fecha=datetime.now(), idUSuario=user, estado=Estado.objects.get(id=1))
             currentOrden.save()
-
-            request.session['currentOrder'] = currentOrden.id;
+            print("---------------------")
+            #print(currentOrden.id)
+            current = CurrentOrder.objects.get(idUser=user.id)
+            #equest.session['currentOrder'] = currentOrden.id;
+            #print(current[0])
+            current.idOrden = currentOrden
+            current.save()
                 
-        print(request.session['currentOrder'])
+        # print(request.session['currentOrder'])
         detalle = DetalleOrden(idOrden = currentOrden, idOpcion=precio, cantidad=cantidad, subtotal=subtotal)
         detalle.save()
 
@@ -84,7 +104,7 @@ def my_profile(request):
             detalleTopping = DetalleOrdenTopping(idDetalleOrden= detalle, idTopping=top)
             detalleTopping.save()
 
-        return render(request, 'accounts/index.html')
+        return HttpResponseRedirect(reverse('profile'))
 
     else:
 
