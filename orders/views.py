@@ -104,6 +104,10 @@ def my_profile(request):
         detalle = DetalleOrden(idOrden = currentOrden, idOpcion=precio, cantidad=cantidad, subtotal=subtotal)
         detalle.save()
 
+        rate = OpcionMenu.objects.get(id=precio.id)
+        rate.contador += 1
+        rate.save()
+
         currentOrden.total += subtotal
         currentOrden.save()
 
