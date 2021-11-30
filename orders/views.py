@@ -32,7 +32,16 @@ def my_profile(request):
             return HttpResponseRedirect(reverse('login'))
     user = User.objects.get(id=request.user.id)
     
-    if request.method == 'POST':
+    if 'updateStatus' in request.POST:
+        orden = request.POST['VOrden']
+
+        nEstado = Orden.objects.get(id=orden)
+        nEstado.estado = Estado.objects.get(id=2)
+        nEstado.save()
+
+        return HttpResponseRedirect(reverse('profile'))
+
+    elif request.method == 'POST':
         orders = Orden.objects.filter(idUSuario=request.user.id)
         
         opcion = request.POST['opcionesMenu']
