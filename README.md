@@ -1,4 +1,4 @@
-# Project 2 => Pizza
+# Project 3 => Pizza
 
 ## Elaborado por Eduardo Castellón (C^2)
 
