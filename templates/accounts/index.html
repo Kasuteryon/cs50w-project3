@@ -1,0 +1,252 @@
+
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% load static %}
+
+{% block head_css %}
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+    <link rel="stylesheet" href="{% static 'jquery.dropdown.min.css' %}">
+{% endblock %}
+
+{% block main %}
+
+<div class="section">
+    <div class="container">
+        <div class="row full-height justify-content-center">
+            <div class="card" style="margin-top: 50px; margin-bottom: 50px;">
+                <div class="card-body">
+                    <h1 class="text-center">Orden Activa</h1>
+
+                    <div class="row"> 
+
+                      <!-- MODAAAAAAAAAAAAAAAAAAL AÑADIR -->
+                      <div class="col-lg-6 col-sm-12">
+                        <div class="d-grip gap-2 text-center">
+                          <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#staticOrden" type="submit">Añadir a Orden <i class="uil uil-plus-circle"></i></button>
+                        </div>
+                      </div>   
+
+                      <div class="col-lg-6 col-sm-12">
+                        <div class="d-grip gap-2 text-center">
+                          <button id="procesar" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#staticProcess" type="submit">Procesar Orden <i class="uil uil-process"></i></button>
+                        </div>
+                      </div>
+
+                      
+                      
+                      <!-- Modal -->
+                      <div class="modal fade" id="staticOrden" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="staticBackdropLabel">Nueva Orden</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+
+                              <form method="POST">
+                                {% csrf_token %}
+                                <div class="form-floating mb-3">
+                                  <select required onchange="ShowSelected();" name="opcionesMenu" id="opcionesMenu" class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                                    <option selected disabled>Opciones</option>
+                                    {% for opcion in Opciones %}
+                                    <option name="2" value="{{opcion.id}}">{{opcion.top}} &#127835 - {{opcion.idCategoria.nombreCategoria}} - {{opcion.nombreOpcion}} - {{opcion.tamaño}} - ${{opcion.precio}}</option>
+                                    
+                                    {% endfor %}
+                                  </select>
+                                  <label for="floatingSelect">Selecciona</label>
+                                </div>
+  
+                                <label for="floatingSelect">Selecciona Toppings</label>
+                                <div class="form-floating mb-3">
+                                  
+                                  
+                                  <div class="dropdown-mul-2">
+                                    <select required id="topping" onchange="ShowSelected();"name="topping" multiple class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                                      <!-- <option selected disabled>Toppings</option> -->
+                              
+                                      {% for opcion in Toppings %}
+                                      <option value="{{opcion.id}}">{{opcion.nombreTopping}}</option>
+                                      
+                                      {% endfor %}
+                                    </select>
+                                  </div>
+                                  
+                                </div>
+  
+                                <div class="form-floating mb-3">
+                                  <input required name="cantidad" type="number" class="form-control" id="floatingInput" placeholder="Cantidad">
+                                  <label for="floatingInput">Cantidad</label>
+                                </div>
+  
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="uil uil-x"></i></button>
+                                  <input type="submit" class="btn btn-primary" value="Ingresar">
+                                </div>
+                              </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- MODAAAAAAAAAAAAAAAAAAL AÑADIR -->
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="staticProcess" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">¿Está seguro que desea procesar?</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+
+                             <form method="POST">
+                              {% csrf_token %}
+                              <h3 class="text-center">Factura</h3>
+                              {% for head in header %}
+                              <div class="row">
+                                <div class="col-lg-6 col-sm-12">
+                                  <h4  class="text-center">N° {{head.id}}</h4>
+                                  <h4 class="text-center">Estado: {{head.estado.nombreEstado}}</h4>
+                                  <input name="VOrden" type="text" value="{{head.id}}" style="display: none;">
+                                </div>
+                                <div class="col-lg-6 col-sm-12">
+                                  <h4 class="text-center">Usuario: {{request.user.username}}</h4>
+                                  <h4 class="text-center">Total: $ {{head.total}}</h4>
+                                </div>
+                              </div>
+                              {% endfor %}
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="uil uil-x"></i></button>
+                                <input type="submit" name="updateStatus" class="btn btn-primary" value="Validar">
+                              </div>
+                            </form> 
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- MODAAAAAAAAAAAAAAAAAAL AÑADIR -->
+
+                    <div class="card-inner" style="margin-top: 40px; padding: 30px;">
+                      <div class="row">
+                        {% for head in header %}
+                        <div class="col-lg-6 col-sm-12">
+                          <h4 id="ordenExists" class="text-center">Orden N°{{head.id}}</h4>
+                          <h4 class="text-center">Estado: {{head.estado.nombreEstado}}</h4>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                          <h4 class="text-center">Usuario: {{request.user.username}}</h4>
+                          <h4 class="text-center">Total: $ {{head.total|floatformat }}</h4>
+                        </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 50px;"> 
+                      <div class="table-responsive">
+                        <table class="table table-dark table-striped table-hover table-bordered ">
+                          <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">Categoría</th>
+                              <th scope="col">Opción</th>
+                              <th scope="col">Tamaño</th>
+                              <th scope="col">Toppings</th>
+                              <th scope="col">Precio Unitario</th>
+                              <th scope="col">Cantidad</th>
+                              <th scope="col">Subtotal</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for item in items %}
+                            <tr>
+                              <th scope="row">{{item.idOrden.id}}</th>
+                              <td>{{item.idOpcion.idCategoria.nombreCategoria}}</td>
+                              <td>{{item.idOpcion.nombreOpcion}}</td>
+                              <td>{{item.idOpcion.tamaño}}</td>
+                              <td>
+                                {% for top in topItem %}
+                                  {% if top.idDetalleOrden.id == item.id %}
+
+                                    {{top.idTopping.nombreTopping}}, 
+
+                                  {% endif %}
+                                {% endfor %}
+                              </td>
+                              <td>$ {{item.idOpcion.precio}}</td>
+                              <td>{{item.cantidad}}</td>
+                              <td>$ {{item.subtotal}}</td>
+                            </tr>
+                            {% endfor %}
+                            
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="{% static 'jquery.dropdown.min.js' %}"></script>
+    <script src="{% static 'mock.js' %}"></script>
+    <script>
+    
+
+    function ShowSelected(){
+      /* Para obtener el texto */
+
+      var combo = document.getElementById("opcionesMenu");
+      var top = document.getElementById("topping");
+      var selected = combo.options[combo.selectedIndex].text;
+      
+      
+      var limit = parseInt(selected.charAt(0));
+
+      
+      console.log(selected.charAt(0))
+
+      maxAllowedMultiselect(top, limit)
+
+
+    }
+
+    function maxAllowedMultiselect(obj, maxAllowedCount) {
+            var selectedOptions = jQuery('#'+obj.id+" option[value!=\'\']:selected");
+            if (selectedOptions.length >= maxAllowedCount) {
+                if (selectedOptions.length > maxAllowedCount) {
+                    selectedOptions.each(function(i) {
+                        if (i >= maxAllowedCount) {
+                            jQuery(this).prop("selected",false);
+                        }
+                    });
+
+                    console.log("Es mayor")
+                }
+                jQuery('#'+obj.id+' option[value!=\'\']').not(':selected').prop("disabled",true);
+            } else {
+              console.log("Es menor")
+                jQuery('#'+obj.id+' option[value!=\'\']').prop("disabled",false);
+            }
+        }
+        
+        window.addEventListener('DOMContentLoaded', (event) => {
+            existe = !!document.getElementById('ordenExists');
+            
+
+            if (!existe){
+              boton = document.getElementById('procesar').hidden=true;
+            }else{
+              boton = document.getElementById('procesar').hidden=false;
+            }
+        });
+
+    </script>
+{% endblock %}

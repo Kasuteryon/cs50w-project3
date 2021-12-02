@@ -1,0 +1,113 @@
+
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% load static %}
+
+{% block head_css %}
+    <link rel="stylesheet" href="{% static 'login.css' %}">
+{% endblock %}
+
+{% block main %}
+
+{% if form.errors %}
+    <p>Datos Inválidos.</p>
+  {% endif %}
+
+  {% if next %}
+    {% if user.is_authenticated %}
+      <p>Tu cuenta no tiene acceso a esta página. Para proceder, ingresa con una que tenga los permisos.</p>
+    {% else %}
+      <p>Inicia Sesión para ver.</p>
+    {% endif %}
+  {% endif %}
+
+  <div class="section">
+    <div class="container">
+        <div class="row full-height justify-content-center">
+            <div class="col-12 text-center align-self-center py-5">
+                <div class="section pb-5 pt-5 pt-sm-2 text-center headerA show-on-scroll">
+                      <label for="reg-log"></label>
+                    <div class="card-3d-wrap mx-auto">
+                        <div class="card-3d-wrapper">
+                            <div class="card-front">
+                                <div class="center-wrap">
+                                    <div class="section text-center">
+
+                                        <form method="post" action="">
+                                            {% csrf_token %}
+                                            
+                                            <h4 class="mb-4 pb-3">Pizza Registro</h4>
+                                            
+                                            
+                                            <div class="form-group mt-2">
+                                                <input required type="text" name="username" 
+                                                class="form-style" 
+                                                placeholder="Usuario" 
+                                                id="id_username" 
+                                                autocomplete="none">
+                                                <i class="input-icon uil uil-at"></i>
+
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                <input required type="email" name="email" 
+                                                class="form-style" 
+                                                placeholder="Email" 
+                                                id="id_email" 
+                                                autocomplete="none">
+                                                <i class="input-icon uil uil-at"></i>
+
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                <input required type="text" name="first_name" 
+                                                class="form-style" 
+                                                placeholder="Nombres" 
+                                                id="id_first_name" 
+                                                autocomplete="none">
+                                                <i class="input-icon uil uil-at"></i>
+
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                <input required type="text" name="last_name" 
+                                                class="form-style" 
+                                                placeholder="Apellidos" 
+                                                id="id_last_name" 
+                                                autocomplete="none">
+                                                <i class="input-icon uil uil-at"></i>
+
+                                            </div>	
+                                            <div class="form-group mt-2">
+                                                <input required type="password" name="password1" 
+                                                class="form-style" 
+                                                placeholder="Contraseña" 
+                                                id="id_password1" autocomplete="none">
+                                                <i class="input-icon uil uil-lock-alt"></i>
+                                            </div>
+
+                                            <div class="form-group mt-2">
+                                                <input required type="password" name="password2" 
+                                                class="form-style" 
+                                                placeholder="Repetir Contraseña" 
+                                                id="id_password2" autocomplete="none">
+                                                <i class="input-icon uil uil-lock-alt"></i>
+                                            </div>
+
+                                            <div class="d-grid gap-2">
+                                                <input type="submit" name="Create User" class="btn mt-4" />
+                                            </div>
+                                            
+                                            
+                                        </form>
+
+                                      </div>
+                                  </div>
+                              </div>
+
+                        </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+    </div>
+</div>
+
+{% endblock %}
