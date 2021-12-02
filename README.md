@@ -112,7 +112,7 @@ Una vez preparada la pizza y entregada desde el admin se podrá editar la orden 
 
 #### 3. Contador de Preferidos
 
-Desde el Menú tambien se podrá visualizar la cantidad de veces que cada opción se ha pedido, ordenandose de mayor a menor.
+Desde el Menú tambien se podrá visualizar la cantidad de veces que cada opción se ha pedido, ordenandose de mayor a menor según su categoría.
 
 ![Imagen](./static/img/preferidos.png)
 
