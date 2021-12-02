@@ -10,6 +10,6 @@ urlpatterns = [
     path('accounts/profile/', views.my_profile, name='profile'),
     path('register/', views.register, name='register'),
     path('history/', views.history, name='history'),
-    path('jet/', include('jet.urls', 'jet')),
+    #path('jet/', include('jet.urls', 'jet')),
     
 ]

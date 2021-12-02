@@ -1,4 +1,5 @@
 Django
 django-bootstrap5
-django-jet-reboot
+django-admin-volt
+# django-jet-reboot
 Pillow

@@ -32,7 +32,8 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
-    'jet',
+    #'admin_volt.apps.AdminVoltConfig',
+    'jazzmin',
     'orders.apps.OrdersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
