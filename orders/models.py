@@ -18,7 +18,7 @@ class OpcionMenu(models.Model):
     top = models.IntegerField(verbose_name="Cantidad de Toppings")
 
     def __str__(self):
-        return f"{self.nombreOpcion} - {self.precio} - {self.tamaño} - {self.idCategoria} - Rank: {self.contador}"
+        return f"{self.nombreOpcion} - Precio: $ {self.precio} - Tamaño: {self.tamaño} - {self.idCategoria} - Rank: {self.contador}"
 
 class Toppings(models.Model):
     nombreTopping = models.CharField(verbose_name="Nombre del Topping", max_length=30)
@@ -42,7 +42,7 @@ class Orden(models.Model):
     estado = models.ForeignKey(Estado,  on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
-        return f"N° {self.id} - Total: ${self.total} - Por {self.idUSuario} - Estado: {self.estado.nombreEstado}"
+        return f"Orden N° {self.id} - Con Total: ${self.total} - Por: {self.idUSuario.first_name} {self.idUSuario.last_name} - En estado: {self.estado.nombreEstado}"
 
 class DetalleOrden(models.Model):
     idOrden = models.ForeignKey(Orden, on_delete=models.SET_NULL, null=True, blank=True)

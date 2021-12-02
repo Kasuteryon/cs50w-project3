@@ -115,3 +115,7 @@ Una vez preparada la pizza y entregada desde el admin se podrá editar la orden 
 Desde el Menú tambien se podrá visualizar la cantidad de veces que cada opción se ha pedido, ordenandose de mayor a menor.
 
 ![Imagen](./static/img/preferidos.png)
+
+#### 4. Imágenes en el menú (Apreciable en fotos anteriores)
+
+#### 5. Pizzas Especiales tienen máximo 5 toppings
