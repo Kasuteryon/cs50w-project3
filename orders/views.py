@@ -49,8 +49,6 @@ def my_profile(request):
         cantidad = request.POST['cantidad']
 
         precio = OpcionMenu.objects.get(id=opcion)
-        subtotal = precio.precio * int(cantidad)
-    
         
         if not orders.exists():
             currentOrden = Orden(total=0, fecha=datetime.now(), idUSuario=user, estado=Estado.objects.get(id=1))
@@ -99,10 +97,22 @@ def my_profile(request):
             #print(current[0])
             current.idOrden = currentOrden
             current.save()
-                
+        
+
+        subtotal = precio.precio * int(cantidad)
         # print(request.session['currentOrder'])
         detalle = DetalleOrden(idOrden = currentOrden, idOpcion=precio, cantidad=cantidad, subtotal=subtotal)
         detalle.save()
+     
+        if precio.id == 48 or precio.id == 47:
+            identi = int(detalle.id) 
+            cantTop = DetalleOrdenTopping.objects.filter(idDetalleOrden=identi)
+            print(cantTop)
+            for item in cantTop:
+                subtotal = (precio.precio + (cantTop.count() * 0.5)) * int(cantidad)
+                detalle.subtotal = subtotal
+                detalle.save()
+                
 
         rate = OpcionMenu.objects.get(id=precio.id)
         rate.contador += 1
@@ -134,10 +144,11 @@ def my_profile(request):
             'Opciones': OpcionMenu.objects.all(),
             'Toppings': Toppings.objects.all(),
             'header': header,
-            'items': items
+            'items': items,
+            'topItem': DetalleOrdenTopping.objects.all()
         }   
         print("---------------------")
-        print(items)
+        #print(items)
 
         return render(request, 'accounts/index.html', context)
 

@@ -18,7 +18,7 @@ class OpcionMenu(models.Model):
     top = models.IntegerField(verbose_name="Cantidad de Toppings")
 
     def __str__(self):
-        return f"{self.nombreOpcion} - Precio: $ {self.precio} - Tamaño: {self.tamaño} - {self.idCategoria} - Rank: {self.contador}"
+        return f"{self.nombreOpcion} - Precio: $ {self.precio} - Tamaño: {self.tamaño} - {self.idCategoria} - Rank: {self.contador} - Id: {self.id}"
 
 class Toppings(models.Model):
     nombreTopping = models.CharField(verbose_name="Nombre del Topping", max_length=30)
@@ -51,7 +51,7 @@ class DetalleOrden(models.Model):
     subtotal = models.FloatField(verbose_name="Subtotal")
 
     def __str__(self):
-        return f"Orden {self.idOrden} - Opción: {self.idOpcion} - {self.cantidad} Unidades - ${self.subtotal}"
+        return f"Id: {self.id} - {self.idOrden} - Opción: {self.idOpcion} - {self.cantidad} Unidades - ${self.subtotal}"
 
 class DetalleOrdenTopping(models.Model):
     idDetalleOrden = models.ForeignKey(DetalleOrden, on_delete=models.SET_NULL, null=True, blank=True)
